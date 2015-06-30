@@ -1,0 +1,239 @@
+<!doctype html>
+<html>
+  <head>
+   <meta charset="UTF-8"/>
+    <title> Socle and Radical Series Project  </title>
+     <style>
+        strong {
+        font-size: 150%;
+        }
+        .important {
+        fill: black;
+        stroke: none;
+        font-family:  "Times New Roman", Times, Serif;
+        font-size: 150%;
+        font-weight: bold;
+        }
+     </style>
+   </head>
+   <body>
+<div style="width: 800px;">
+   <h1><strong>Compute2 Source Code</strong></h1>
+</div>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+<div>
+<code>
+<pre class="prettyprint">
+Read("modatlasgroups"); #reads in modatlasgroupsstring
+Read("ReadAlgebras"); #read in algebra lists
+
+# Missing L2(25) and L3(9)
+Remove(modatlasgroupsstring, 46);
+Remove(modatlasgroupsstring, 13);
+
+#############################################################################
+#
+#F  Function compute2( <list> )
+#
+# <#GAPDoc Label="compute2Header">
+#   <ManSection>
+#     <Filt Type="Function" Name="compute2" Arg="index, filenames, pathname"/>
+#     <!--
+# INPUT: <index>: of the scratch folder for algebra records
+#	 <filenames>: the list of filenames for series of algebra 
+#	 <pathname>: string of path to directory with algebra record folders
+#     -->
+#
+#     <!--
+# OUTPUT: Prints File(s)
+#     -->
+#     <Returns> file(s) containing the computed socle and radical series
+#               for the given algebra records.
+#     </Returns>
+#     <Description><E>compute2</E> uses function srCheckBasicAlgebra
+#                  from GAPssrsCheck, computes one after another, the 
+#                  socle and radical series for the read in algebras.
+#     </Description>
+#   </ManSection>
+# <#/GAPDoc>
+#
+# METHOD: Run through list of filenames, read in algebra record,
+#         compute socle and radical series, then print to file.
+#
+#############################################################################
+
+compute2 := function(index, filenames, pathname)
+  local x,y, path, algRec, alglist;
+  path := pathname;
+  y := index;
+  if y = 0 then;
+  else
+    alglist:= algebraList[y];
+    filenames:= algebraNames[y];
+    for x in [1..Length(alglist)] do
+      # Create path name for the algebra record
+      # Example: string:= "/scratch/rbaumann/basicAlgebras/basicalgebras";
+      path := Concatenation(path, algebraStrings[y]);
+      path := Concatenation(path, alglist[x]);
+      # Read in algebra record
+      algRec:=ReadAlgebraRecord(path);
+      # Compute the socle and radical series in listPIMs
+      srCheckBasicAlgebra(algRec, algRec.group, algRec.prime);
+      # Print the computed socle and radical series to file
+      PrintTo(filenames[x], "list:=");
+      AppendTo(filenames[x], listPIMs);
+      AppendTo(filenames[x], ";");
+    od;
+  fi;
+end;
+
+
+#############################################################################
+#
+#F  Function compute22( <list> )
+#
+# <#GAPDoc Label="compute22Header">
+#   <ManSection>
+#     <Filt Type="Function" Name="compute22" Arg="algebraList, pathname"/>
+#     <!--
+# INPUT: <algebraList>: list of algebra record file names (no path)
+#	 <pathname>: string of path to directory with algebra records
+#     -->
+#
+#     <!--
+# OUTPUT: Prints File(s)
+#     -->
+#     <Returns> file(s) containing the computed socle and radical series
+#               for the given algebra records.
+#     </Returns>
+#     <Description><E>compute22</E> uses function srCheckBasicAlgebra
+#                  from GAPssrsCheck, computes one after another, the 
+#                  socle and radical series for the read in algebras.
+#     </Description>
+#   </ManSection>
+# <#/GAPDoc>
+#
+# METHOD: Run through list of filenames, read in algebra record,
+#         compute socle and radical series, then print to file.
+#
+#############################################################################
+
+compute22 := function(algebraList, pathname)
+  local x, path, algRec, name;
+  path := pathname;
+    for x in [1..Length(algebraList)] do
+      # Create path name for the algebra record
+      # Example: path:= "/scratch/rbaumann/basicAlgebras/basicalgebras.aldebaran/";
+      path := Concatenation(path, algebraList[x]);
+      # Read in algebra record
+      algRec:=ReadAlgebraRecord(path);
+      # Compute the socle and radical series in listPIMs
+      srCheckBasicAlgebra(algRec, algRec.group, algRec.prime);
+      name := Concatenation(Concatenation(algRec.group, "p"), String(algRec.prime));
+      # Add algebra name to list of ones computed
+      Add(computedNames, name);
+      # Print the computed socle and radical series to file
+      PrintTo(name, "list:=");
+      AppendTo(name, listPIMs);
+      AppendTo(name, ";");
+    od;
+end;
+
+
+# Global list of algebra records and factors
+groupOrders:=[];
+
+#############################################################################
+#
+#F  Function algebraPrimes( <list> )
+#
+# <#GAPDoc Label="algebraPrimesHeader">
+#   <ManSection>
+#     <Filt Type="Function" Name="algebraPrimes" Arg=""/>
+#     <!--
+# INPUT: 
+#     -->
+#
+#     <!--
+# OUTPUT: nothing
+#     -->
+#     <Returns> list of algebras with corresponding list of factors.
+#     </Returns>
+#     <Description><E>algebraPrimes</E> computes factors of gorup order.
+#     </Description>
+#   </ManSection>
+# <#/GAPDoc>
+#
+# METHOD: Create group, factor order to get factors.
+#
+#############################################################################
+
+algebraPrimes := function()
+  local x, string, algRec, groupRec, group, factors;
+  groupOrders:=[];
+  for x in [1..Length(modatlasgroupsstring)] do
+      group := AtlasGroup(modatlasgroupsstring[x]);
+      factors:= PrimeDivisors(Size(group));
+      groupRec:= rec(group := modatlasgroupsstring[x], factors:= factors);
+      Add(groupOrders, groupRec);
+    od;
+end;
+
+
+path:=""; string:="";
+
+#############################################################################
+#
+#F  Function computeAlgebras( <list> )
+#
+# <#GAPDoc Label="computeAlgebrasHeader">
+#   <ManSection>
+#     <Filt Type="Function" Name="computeAlgebras" Arg="groupRec, groupNames"/>
+#     <!--
+# INPUT: <groupRec>: record of groups and characteristics to compute algebras for.
+#	 <groupNames>: list of string names for groups to use for file names.
+#     -->
+#
+#     <!--
+# OUTPUT: Nothing
+#     -->
+#     <Returns> file(s) containing the computed basic algebra for specified
+#               group in specified characteristic. Written to set folder.
+#     </Returns>
+#     <Description><E>computeAlgebras</E> uses function AutoCalcBasic
+#                  to compute the basic algebra. 
+#     </Description>
+#   </ManSection>
+# <#/GAPDoc>
+#
+# METHOD: Run through list of groups and characteristics, compute basic
+#         algebras using AutoCalcBasic and write algebras to file.
+#
+#############################################################################
+
+computeAlgebras := function( groupRec, groupNames)
+  local i,j, algebra, path1;
+  # path to put files of algebra records
+  path:="/u4/rbaumann/gap/Fixed/AlgebraRecords/";
+  for i in [1..Length(groupRec)] do
+    for j in [1..Length(groupRec[i].factors)] do
+      # Initialize algebra
+      algebra:=InitializeRecordAtlasGroup(groupRec[i].group, groupRec[i].factors[j], 1);
+      # Run AutoCalcBasic
+      AutoCalcBasic(algebra);
+      string := Concatenation(Concatenation(Concatenation(groupNames[i], "p"), String(groupRec[i].factors[j])), "b1basicalg.gap");
+      path1:= Concatenation(path, string);
+      WriteAlgebraRecord( algebra, path1);
+    od;
+  od; 
+end;
+
+
+
+
+
+</pre>
+</code>
+</div>
+</html>
+

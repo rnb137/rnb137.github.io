@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8"/>
+    <title> Socle and Radical Series Project  </title>
+     <style>
+        strong {
+        font-size: 150%;
+        }
+        .important {
+        fill: black;
+        stroke: none;
+        font-family:  "Times New Roman", Times, Serif;
+        font-size: 150%;
+        font-weight: bold;
+        }
+     </style>
+   </head>
+   <body>
+<div style="width: 800px;">
+   <h1><strong>groupsSRComputed Source Code:</strong></h1>
+</div>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+<div>
+<code>
+<pre class="prettyprint">
+##########################################################
+#
+#   Used to create the table in LaTeX of all groups and
+#   characteristics for which I computed and compared the 
+#   socle and radical sereis of the basic algebra.
+#
+##########################################################
+
+# Number of groups in each type in mod2
+ln:=[7,10,18, 15  ,6];
+
+# List of groups based on finite group type
+mod2:=[ 
+#Alternating groups
+"A5", 
+"A6", 
+"A7",
+"A8",
+"A10",
+"A11",
+"A12", 
+
+#Sporatic Groups
+"HS",
+"J1",
+"J2", 
+"J3", 
+"M11",
+"M12",
+"M22",
+"M23",
+"M24",
+"Mcl", 
+
+#Linear Groups
+"L2(8)",
+"L2(11)",
+"L2(13)",
+"L2(17)", 
+"L2(19)",
+"L2(23)",
+"L2(27)",
+"L2(29)",
+"L2(31)", 
+"L2(32)",
+"L3(2)",
+"L3(3)",
+"L3(4)",
+"L3(5)", 
+"L3(7)",
+"L3(8)",
+"L4(3)",
+"L5(2)", 
+
+#Classical Groups
+"O8+(2)",
+"O8-(2)",
+"S4(4)",
+"S4(5)",
+"S6(2)", 
+"U3(3)",
+"U3(4)", 
+"U3(5)", 
+"U3(7)",
+"U3(8)",
+"U3(9)", 
+"U3(11)",
+"U4(2)",
+"U4(3)",
+"U5(2)",
+
+#Exceptional Groups of Lie Type
+"Sz(8)",
+"Sz(32)",
+"G2(3)",
+"G2(4)", 
+"2F4(2)'",
+"3D4(2)"];
+
+i:=0;j:=0; k:=0;
+
+# Initialize lists to be a list  containing records read in from 
+# files in computedNames. Records will contain the group name, prime
+# socle and radical series, etc. 
+lists:=[];
+for i in [1..Length(computedNames)] do
+Read(computedNames[i]);
+Add(lists, list);
+od;
+
+# lists2 organizes lists based on group names in mod2
+lists2:=[];
+for i in [1..56] do
+Add(lists2, []);
+for j in [1..Length(lists)] do
+if (lists[j].group =mod2[i]) then Add(lists2[i], lists[j].prime);fi;
+od;od; 
+
+# lists3 organizes lists2 based on the prime 
+lists3:=[];
+for i in [1..56] do
+Add(lists3, []);
+for k in [1..25] do
+for j in [1..Length(lists2[i])] do
+if (Primes[k] = lists2[i][j]) then Add(lists3[i], lists2[i][j]);
+fi;od;
+od;
+od;
+
+# Can further organize based on Sylow Type
+# Example: Initialize group g:=Group(AtlasGenerator(groupName, 1).generators);
+# Initialize p-Sylow subgroup s:=SylowSubgroup(g,p);
+# Get ID of group in AllSmallGroupsLibrary IdSmallGroups(s); 
+
+#############################################################################
+#
+#F  Function groupsToLaTeX( <list> )
+#
+# <#GAPDoc Label="groupsToLaTeXHeader">
+#   <ManSection>
+#     <Filt Type="Function" Name="groupsToLaTeX" Arg="fileName, title"/>
+#     <!--
+# INPUT: <title>: string title for the table printed to LaTeX.
+#	 <fileName>: string name for the file the table is printed to. 
+#     -->
+#
+#     <!--
+# OUTPUT: Prints a File
+#     -->
+#     <Returns> file containing LaTeX code for a table with list of 
+#               groups and characteristics for which the socle and 
+#               radical series were computed for the basic algebra.
+#     </Returns>
+#     <Description><E>groupsToLaTeX</E> See returns.
+#     </Description>
+#   </ManSection>
+# <#/GAPDoc>
+#
+# METHOD: Run through list of primes (lists3) for which socle and 
+#         radical series were computed for each group in mod2 list,
+#         creates string of primes printed to file of LaTeX
+#         commands for a row in a LaTeX table environment.
+#
+#############################################################################
+
+groupsToLaTeX := function (fileName, title)
+  local i,j,k, n, str, truth;
+  PrintTo(fileName, Concatenation(Concatenation(Concatenation("\\begin{table}[htp] 
+	\n\\centering \n\\caption{",  title),"} \n\\label{tab:gr} 
+	\n\\footnotesize\\setlength{\\tabcolsep}{2.5pt} 
+	\n\\begin{tabular}{l@{\\hspace{6pt}} *{", String(12)), "}{c}} 
+	\n\\toprule\n"));
+  truth := false;
+  str:="";
+  for i in [1..Length(mod2)] do
+	AppendTo(fileName, mod2[i]);
+	n:= 1;
+ 	for k in [1..12] do 
+ 		for j in [n..Length(lists3[i])] do
+  			if (Primes[k] = lists3[i][j]) then 
+				n:=n+1;
+				truth := true;
+				str:=Concatenation("& ", String(lists3[i][j]));
+			fi;
+		od;
+		if (truth = false) then str:="& "; fi;
+ 		if (k=12) then str:=Concatenation(str, " \\\\");
+		fi;
+    		AppendTo(fileName, str);
+	truth := false;
+	str:="";
+	od;
+	if (i = 7 or i =17 or i =35 or i= 50) then AppendTo(fileName, "\\hline"); fi;
+  	AppendTo(fileName, "\n");
+  od;
+  AppendTo(fileName, "\\bottomrule \n\\addlinespace \n\\end{tabular} \n\\end{table}\n");
+end;
+
+</pre>
+</code>
+</div>
+</body>
+</html>
+

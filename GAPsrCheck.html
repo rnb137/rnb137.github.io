@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>	
+  <head>
+   <meta charset="UTF-8"/>
+    <title> Socle and Radical Series Project  </title>
+     <style>
+	strong {
+	font-size: 150%;
+	}
+	.important {
+	fill: black;
+	stroke: none;
+	font-family:  "Times New Roman", Times, Serif;
+	font-size: 150%;
+	font-weight: bold;
+	}
+     </style>
+   </head>
+   <body>
+<div style="width: 800px;"> 
+   <h1><strong>GAPssrsCheck Source Code:</strong></h1>
+</div>
+<div>
+<code>
+<pre class="prettyprint">
+# Gap code for checking the socle and radical series of a group
+# identify for which groups the socle and radical series coincide
+# and for the ones that don't find the factors in the socle and radical
+# that differ and by what simple module they differ by 
+
+#############################################################################
+#
+#F  Function srCheck( <list> )
+#
+# <#GAPDoc Label="srCheckHeader">
+#   <ManSection>
+#     <Filt Type="Function" Name="srCheck" Arg="group, char"/>
+#     <!--
+# INPUT: <group>: string name of group.
+#	 <char>: characterisitc of algebra, prime dividing group order. 
+#     -->
+#
+#     <!--
+# OUTPUT: Nothing
+#     -->
+#     <Returns> list of records for each PIM of this group with socle and radical
+#               series information.
+#     </Returns>
+#     <Description><E>srCheck</E> checking the socle and radical series of a group
+#                                 algebra to see when they coincide.  
+#     </Description>
+#   </ManSection>
+# <#/GAPDoc>
+#
+# METHOD: create the basic algebra for the specified group and characterisitc
+#         using AtlasRep and Basic pagackages. Double check that each PIM has
+#         the same database of simple modules then create the socle and radical
+#         series. Make a matrix for both series to keep track of the simple 
+#         modules in each factor for easy comparison. Then add PIM information
+#         for socle and radical series to listPIMs.
+#
+#############################################################################
+
+# Global variable to contain info for socle and radical series for the 
+# specified group algebra.
+listPIMs:=[];
+
+srCheck := function(group, char)
+
+  local n,i,j,k,m,alg,list,db,module,soc,rad,mats,matr, a, equal, flag;
+  equal := true; flag := true;
+  a:=rec();list:=[];listPIMs :=[];
+  alg := InitializeRecordAtlasGroup(group, char, 1);
+  AutoCalcBasic(alg);
+
+  # get each PIM, with same db of simple modules across the board
+  for n in [1..Length(alg.PIMs)] do
+    module := alg.PIMs[n].PIM;
+    db := Chop(alg.global_simples[1]).db;
+    for m in [2..Length(alg.global_simples)] do
+      db := Chop(alg.global_simples[m], rec(db := db)).db; 
+    od;
+
+    # Create the Socle and Radical series for each PIM
+    soc := SocleSeries(module, db);
+    rad := RadicalSeries(module, db);
+
+    # use matrices to keep track of the simples in each factor of the
+    # socle and radical series to compare
+    # If the matrices are equal then the Socle and Radical series 
+    # are the same, if not we can read off from the matrices by what
+    # they differ in terms of simple modules
+    mats := NullMat(Length(soc.isotypes), Length(alg.PIMs));
+    matr := NullMat(Length(rad.isotypes), Length(alg.PIMs));
+
+    # create the socle series matrix which shows which simple modules are
+    # in each factor of the socle series.
+    for i in [1..Length(soc.isotypes)] do
+      for k in [1..Length(soc.isotypes[i])] do
+        for j in [i..Length(mats)] do
+          mats[j][soc.isotypes[i][k]]:=mats[j][soc.isotypes[i][k]]+1;
+    od;od;od;
+
+    # create the radical series matrix which shows which simple modules
+    # are in each factor of the radical series.
+    for i in [1..Length(rad.isotypes)] do
+      for k in [1..Length(rad.isotypes[Length(rad.isotypes)-i+1])] do
+        for j in [i..Length(matr)] do
+          matr[j][rad.isotypes[Length(rad.isotypes)-i+1][k]] := matr[j][rad.isotypes[Length(rad.isotypes)-i+1][k]]+1;
+    od;od;od;
+
+    # checks if the socle and radical series for PIM are equal
+    if mats = matr then equal := true;
+    else equal := false;
+      flag :=  false;
+    fi;
+
+    # create PIM record and add to listPIMs
+    # can't print PIM :=module..
+    a:= rec(socleSeries := mats, radicalSeries := matr,srEqual := equal);
+    list[n] := a; 
+  od;
+
+  # create group record with listPIMs and add to list
+  listPIMs := rec(group:= group, prime:= char, PIMs := list, srAllEqual := flag);
+
+end;
+
+alg:=rec();
+
+#############################################################################
+#
+#F  Function srCheckAlgebra( <list> )
+#
+# <#GAPDoc Label="srCheckAlgebraHeader">
+#   <ManSection>
+#     <Filt Type="Function" Name="srCheckAlgebra" Arg="algebra, group, char"/>
+#     <!--
+# INPUT: <algebra>: basic algebra post AutoCalcBasic, else give 0 to compute
+#                   the basic algebra.
+#        <group>: string name of group.
+#        <char>: characterisitc of algebra, prime dividing group order.
+#     -->
+#
+#     <!--
+# OUTPUT: Nothing
+#     -->
+#     <Returns> list of records for each PIM of this group with socle and radical
+#               series information.
+#     </Returns>
+#     <Description><E>srCheckAlgebra</E> checking the socle and radical series of
+#                                        a group algebra to see when they coincide.
+#     </Description>
+#   </ManSection>
+# <#/GAPDoc>
+#
+# METHOD: faster than srCheck, avoid creating the basic algebra by using ones
+#         already computed for the specified group and characterisitc. Double 
+#         check that each PIM has the same database of simple modules then create 
+#         the socle and radical series. Make a matrix for both series to keep 
+#         track of the simple modules in each factor for easy comparison. Then 
+#         add PIM information for socle and radical series to listPIMs.
+#
+#############################################################################
+
+srCheckBasicAlgebra := function(algebra, group, char)
+  local a,n,i,j,k,m, list, module, equal, flag, matPimList,soc,rad,mats,matr, db, socle, radical, str, PIMs;
+  if algebra = 0 then;
+    alg := InitializeRecordAtlasGroup(group, char, 1);
+    AutoCalcBasic(alg);
+  else alg:= algebra;
+  fi;
+  socle:=[]; radical:=[]; db:=[];
+  equal := true; flag := true;
+  a:=rec();list:=[];listPIMs :=[];matPimList:=[];PIMs:=[];
+
+  for i in [1..Length(alg.PIMs)] do
+    str:=Concatenation("pim", String(i));
+    matPimList[i]:=[];
+    for j in [1..Length(RecNames(alg.HOMs))] do
+      matPimList[i][j] := alg.matrices.(str).(j);
+    od;
+    PIMs[i]:=Module(matPimList[i]);
+  od;
+
+  db := Chop(PIMs[1]).db;
+  for m in [2..Length(PIMs)] do
+    db := Chop(PIMs[m], rec(db := db)).db; 
+  od;
+
+  # get each PIM, with same db of simple modules across the board
+  for n in [1..Length(PIMs)] do
+ 
+    # Create the Socle and Radical series for each PIM
+    soc := SocleSeries(PIMs[n], db);
+    rad := RadicalSeries(PIMs[n], db);
+
+    # use matrices to keep track of the simples in each factor of the
+    # socle and radical series to compare
+    # If the matrices are equal then the Socle and Radical series 
+    # are the same, if not we can read off from the matrices by what
+    # they differ in terms of simple modules
+    mats := NullMat(Length(soc.isotypes), Length(PIMs));
+    matr := NullMat(Length(rad.isotypes), Length(PIMs));
+
+    # create the socle series matrix which shows which simple modules are
+    # in each factor of the socle series.
+    for i in [1..Length(soc.isotypes)] do
+      for k in [1..Length(soc.isotypes[i])] do
+        for j in [i..Length(mats)] do
+          mats[j][soc.isotypes[i][k]]:=mats[j][soc.isotypes[i][k]]+1;
+    od;od;od;
+
+    # create the radical series matrix which shows which simple modules
+    # are in each factor of the radical series.
+    for i in [1..Length(rad.isotypes)] do
+      for k in [1..Length(rad.isotypes[Length(rad.isotypes)-i+1])] do
+        for j in [i..Length(matr)] do
+          matr[j][rad.isotypes[Length(rad.isotypes)-i+1][k]] := matr[j][rad.isotypes[Length(rad.isotypes)-i+1][k]]+1;
+    od;od;od;
+
+   # checks if the socle and radical series for PIM are equal
+   if mats = matr then equal := true;
+   else equal := false;
+      flag :=  false;
+    fi;
+
+    # create PIM record and add to listPIMs
+    # can't print PIM :=module..
+    a:= rec(socleSeries := mats, radicalSeries := matr,srEqual := equal);
+    list[n] := a; 
+  od;
+
+  # create group record with listPIMs and add to list
+  listPIMs := rec(group:= group, prime:= char, PIMs := list, srAllEqual := flag);
+end;
+</pre>
+</code>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+
+</div>
+</body>
+</html>
+
+

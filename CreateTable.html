@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8"/>
+    <title> Socle and Radical Series Project  </title>
+     <style>
+        strong {
+        font-size: 150%;
+        }
+        .important {
+        fill: black;
+        stroke: none;
+        font-family:  "Times New Roman", Times, Serif;
+        font-size: 150%;
+        font-weight: bold;
+        }
+     </style>
+   </head>
+   <body>
+<div style="width: 800px;">
+   <h1><strong>CreateTable Source Code:</strong></h1>
+</div>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+<div>
+<code>
+<pre class="prettyprint">
+Read("OrderTable"); # Gives buckets and ordered buckets
+
+#############################################################################
+#
+#F  Function makeTable( <list> )
+#
+# <#GAPDoc Label="makeTableHeader">
+#   <ManSection>
+#     <Filt Type="Function" Name="makeTable" Arg="buckets"/>
+#     <!--
+# INPUT: <buckets>: list of lists containing basic algebra info in records
+#                   use elements of orderedBuckets to recreate my tables.
+#     -->
+#
+#     <!--
+# OUTPUT: Nothing
+#     -->
+#     <Returns> matrix of information on how the socle and radical series
+#               differ for each basic algebra.
+#     </Returns>
+#     <Description><E>compute2</E> Should use orderedBuckets created
+#                  from OrderTable. Reads in socle and radical file
+#                  for each basic algebra and computes how they 
+#                  differ in terms of factors, modules in factors,
+#                  and whether the same holds for all PIMs.
+#     </Description>
+#   </ManSection>
+# <#/GAPDoc>
+#
+# METHOD: Run through list of records in orderedBuckets, read in
+#         socle and radica series info for basic algebra, then 
+#         count number of PIMs with differeing socle and radical
+#         series, count the number of differing factors, and 
+#         differeing modules in each factor. Record only the largest
+#         numbers by which they differ and record true or false if
+#         this applies to all PIMs or not.
+#
+#############################################################################
+
+makeTable := function(buckets)
+  local mat, i,j,k,numfact, tnumfact, m, dpim, dfact, dsim, tfact, tsim, truth, rz, cz, s, f, x,y;
+
+  rz:=true; cz:=true; s:=0; f:=0; i:=0; j:=0; x:=0; y:=0;
+  dpim :=0; dfact:=0; dsim:=0; tfact:= true; tsim := true; truth := true;
+  numfact:=0; tnumfact:= true;
+
+  # Initialize a null matrix to be filled in
+  mat :=NullMat(11,Length(buckets)); 
+  # Column 1 of the matrix consists of row names
+  mat[1][1]:="Group"; 
+  mat[2][1]:="Prime"; 
+  mat[3][1]:="Multiplicity"; # of prime in group order
+  mat[4][1]:="\\#PIMs in Block";  # Number of PIMs on the block, in general the principle block
+  mat[5][1]:= "\\#PIMs diff. SR";  # Number of PIMs whose socle and radical series differ
+  mat[6][1]:="Max Factors of PIMs"; # The max number of factors in series between all PIMs
+  mat[7][1]:="All PIMs same length"; # True if all PIMs have the same Loewy length, else false
+  mat[8][1]:="Max \\#diff. factors"; # The max number of differing factors in series between all PIMs
+  mat[9][1]:="PIMs diff by same \\#factors"; # True if all PIMs differ by the same number of factors
+  mat[10][1]:="Max diff \\#modules in factors"; # The max number of differing modules in a factor between all PIMs
+  mat[11][1]:="All factors diff same \\#modules"; # True if all factors differ by the same number of modules 
+  
+  for i in [1..Length(buckets)] do  
+    mat[1][i+1]:= buckets[i].group;
+    Read(buckets[i].name);
+    mat[2][i+1]:= list.prime;
+    mat[3][i+1]:= buckets[i].order;
+    mat[4][i+1]:= Length(list.PIMs);
+    # Initialize variables for computing rows 5-11 of matrix
+    numfact:=0; 
+    tnumfact:= true;
+    dpim :=0; 
+    dfact:=0; 
+    dsim:=0; 
+    tfact:= true; 
+    tsim := true; 
+    truth := true;
+  
+    rz:=true; 
+    cz:=true; 
+    s:=0; 
+    f:=0;
+  
+    # Compute the values for rows 5-11 for each basic algebra
+    for j in [1..Length(list.PIMs)] do
+      m:=[]; f:=0;
+      m:=list.PIMs[j].socleSeries -list.PIMs[j].radicalSeries;
+      if numfact =0 then numfact := Length(m); 
+      elif Length(m)>numfact then 
+	numfact:=Length(m); 
+	tnumfact:= false; 
+      fi;
+  
+      for x in [1..Length(m)] do
+  	      s:=0; 
+  	        for y in [1..Length(TransposedMat(m))] do
+  	          if (m[x][y]= 0) = false then 
+  	  	    rz:= false; 
+  		    cz:= false; 
+  		    s:=s+ m[x][y];
+  	  	    truth := false;
+  	 	  fi;
+  	        od;
+  	  	if dsim = 0 then dsim := s; elif s> dsim then
+  		  dsim := s; 
+  		  tsim := false;
+  		fi;
+  	  	if rz=false then 
+  		  f:=f + 1; 
+  		  rz:= true; 
+  		fi;
+  	    od;
+  	    if dfact = 0 then 
+  	      dfact := f; 
+  	    elif f>dfact then d
+  	      fact := f; 
+  	      tfact:=false; 
+  	    fi;
+  	    if truth = false then dpim := dpim + 1;fi; 
+  	    f:=0;
+    od;
+    mat[5][i+1]:= dpim;
+    mat[6][i+1]:=numfact;
+    mat[7][i+1]:=tnumfact;
+    mat[8][i+1]:= dfact;
+    mat[9][i+1]:= tfact;
+    mat[10][i+1]:= dsim;
+    mat[11][i+1]:=tsim;
+  od;
+  return mat;
+end;
+
+</pre>
+</code>
+</div>
+</body>
+</html>
+

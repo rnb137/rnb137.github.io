@@ -1,1 +1,97 @@
-"Hello World" 
+<!doctype html>
+<html>	
+  <head>
+   <meta charset="UTF-8"/>
+    <title> Socle and Radical Series Project  </title>
+     <style>
+	strong {
+	font-size: 150%;
+	}
+	.important {
+	fill: black;
+	stroke: none;
+	font-family:  "Times New Roman", Times, Serif;
+	font-size: 150%;
+	font-weight: bold;
+	}
+     </style>
+   </head>
+   <body>
+<div style="width: 800px;"> 
+   <h1><strong>Computational Group Theory</strong></h1>
+<h3> University of Arizona, Department of Mathematics </h3>
+<h3> Master's Thesis work by Rachel Baumann </h3>
+</div>
+<div  style="width: 800px;">
+<p>My research is on the structure of the socle and radical series for 
+projective indecomposable modules (PIMs) of finite simple groups with 
+Klaus Lux here at the <a href="http://www.arizona.edu/">University of Arizona</a>.  Because of the size of the 
+PIMs, I use the Groups, Algorithms, and Programming (GAP) <a href="http://www.gap-system.org/">GAP</a>
+software package designed for computational group theory. For 
+more information, here is some of my recent work:</p>
+<ul>
+<li> Paper: <a href="srs.pdf">The Structure of the Socle and Radical Series for Projective Indecomposable Modules of Simple Groups</a> </li>
+</ul>
+
+<ul>
+<li> Presentation: <a href="srsPresentation.pdf">The Structure of the Socle and Radical Series for Projective Indecomposable Modules of Simple Groups</a></li>
+</ul>
+
+</div>
+<div> 
+<h2> Results </h2>
+A list of all groups and characterisitics for which I computed and compared the socle and radical series is given  <a href="TablePracticeFromGAP.pdf">here</a>.
+<ul>
+<li>  <a href="TablesPrime2.pdf">Results of groups in characteristic 2</a> </li>
+<li>  <a href="TablesPrime3.pdf">Results of groups in characteristic 3</a> </li>
+<li>  <a href="TablesPrime5.pdf">Results of groups in characteristic 5</a> </li>
+<li>  <a href="TablesPrime7.pdf">Results of groups in characteristic 7</a> </li>
+<li>  <a href="TablesPrimes11_13.pdf">Results of groups in characteristic 11 and 13</a> </li>
+<li>  <a href="TablePrimes19_23_29_31_37.pdf">Results of groups in characteristic 19, 23, 29, 31, and 37</a> </li>
+
+</ul>
+  </div>
+<div>
+<h2> GAP Code</h2>
+</div>
+<div style="width: 800px;">
+To recreate the above results you will need a working copy of or access to 
+the Basic package. Also many of the basic algebras have already been computed by Klaus Lux or by myself, which can be a lenght process. So having access to these basic algebra files would be beneficial. At present almost all are located on chivo.math.arizona.edu in /scratch/rbaumann/basicAlgebras or can be obtained from myself or Klaus Lux. Below is my working source code used for this project and files they use:
+
+<ul>
+<li> <a href="ReadSRseries.html">ReadSRseries Source Code</a> </li>
+<li> <a href="GAPsrCheck.html">GAPssrsCheck Source Code</a> </li>
+<li> <a href="LandrockCheck.html">LandrockCheck Souce Code</a> </li>
+<li> <a href="Compute2.html">Compute2 Source Code</a> </li>
+</ul>
+
+<h3> Files </h2>
+<ul>
+ <li> <a href="modatlasgroups.html">modatlasgroups File</a> </li>
+<li> <a href="ReadAlgebras.html">ReadAlgebras File</a> </li>
+<!--<li> <a href="ComputedNames.html">ComputedNames File</a> </li>-->
+</ul>
+
+<h3>Organizing Data and Creating Tables </h3>
+<ul>
+<li> <a href="groupsSRComputed.html">groupsSRComputed Source Code</a> </li>
+<li> <a href="OrderTable.html">OrderTable Source Code</a> </li>
+<li> <a href="CreateTable.html">CreateTable Source Code</a> </li>
+<li> <a href="printToLatex.html">PrintTableToLaTeX Source Code</a> </li>
+</ul>
+</div>
+<div>
+<h2>Some Resources</h2>
+<p> Groups, Algorithms, and Programmming: <a href="http://www.gap-system.org/">GAP</a><p>
+<p> See references at the end of my paper:  <a href="srs.pdf">The Structure of the Socle and Radical Series for Projective Indecomposable Modules of Simple Groups</a> </p>
+<p> <a href="http://brauer.maths.qmul.ac.uk/Atlas/v3/"> Atlas of Finite Group Representations - Version 3</a>   </p>
+<p> <a href="http://www.icm.tu-bs.de/ag_algebra/software/small/">Small Groups Library</a> <p>
+
+<p> Javascript code prettifier: <a href="https://google-code-prettify.googlecode.com/svn/trunk/README.html">PrettyPrint</a></p>
+<p> University of Arizona, Math Department Webpage: <a href="http://math.arizona.edu/people/rnb137">Rachel Baumann</a>
+<p> University of Arizona, Math Department Webpage: <a href="http://math.arizona.edu/~klux/">Klaus Lux</a>
+
+</div>
+
+   </body>
+</html>
