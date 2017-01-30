@@ -11,6 +11,7 @@
 	
   <style>
 	strong {font-size: 150%;}
+	.bold {font-weight: bold;}
 	#title {
 		font-family:  "Quattrocento" !important;
 		font-size: 40px !important;
@@ -35,7 +36,7 @@
   		padding: 0px;
 		line-height:30px;
     		background-color:#eeeeee;
-    		height:500px;
+    		height:600px;
     		width:300px;
     		float:left;}
 	.indentedtext{
@@ -44,23 +45,26 @@
     		text-indent:100px;}
 	.space{
 		margin-bottom: 1.5cm;}
-	ul {
+	.ul-s {
   		margin: 0px;
   		padding: 0px;
   		list-style: none;
   		text-decoration: none; 
 		background-color:#eeeeee;}
-	li {
+	.li-s {
 	 	padding-right: 5px
   		text-decoration: none;}
-	a {
+	.a-s {
   		display: block;
 		color:#414042;		
   		text-decoration: none;}
-	ul li a:hover {
+	a {
+		text-decoration:none;
+		color:#8C08E8;}
+	.ul-s .li-s .a-s:hover {
   		background-color: #ddd;}
-	ul li a:hover span {
-  		visibility: visible}
+	.ul-s .li-s .a-s:hover span {
+  		visibility: visible;}
   </style>
 
   <script src="jquery-1.11.3.js"></script>
@@ -77,24 +81,27 @@
    		<div  id="sidebar">
 			<p class=space></p>
 	   		<div id="menu">
-				<ul class=ul-sidebar>
-<li class=li-sidebar><a class=a-sidebar href="index.html">Home</a></li>					
-<li class=li-sidebar><a class=a-sidebar href="vector.html">Announcements</a></li>
-<li class=li-sidebar><a class=a-sidebar href="vectorClassNotes.html">Class Notes</a></li>
-<li class=li-sidebar><a class=a-sidebar href="vectorHW.html">Homework</a></li>
-<li class=li-sidebar><a class=a-sidebar href="vectorHWkeys.html">Homework Solutions</a></li>
-<li class=li-sidebar><a class=a-sidebar href="vectorResources.html">Other Resources</a></li>
+				<ul class="ul-sidebar ul-s">
+<li class="li-sidebar li-s"><a class="a-sidebar a-s" href="index.html">Home</a></li>					
+<li class="li-sidebar li-s"><a class="a-sidebar a-s" href="vector.html">Announcements</a></li>
+<li class="li-sidebar li-s"><a class="a-sidebar a-s" href="vectorClassNotes.html">Class Notes</a></li>
+<li class="li-sidebar li-s"><a class="a-sidebar a-s" href="vectorHW.html">Homework</a></li>
+<li class="li-sidebar li-s"><a class="a-sidebar a-s" href="vectorHWkeys.html">Homework Solutions</a></li>
+<li class="li-sidebar li-s"><a class="a-sidebar a-s" href="vectorResources.html">Other Resources</a></li>
 					</ul>
 			</div>
 		</div>
 
-		<div id ="announce" >
+		<div id ="announce" style="margin-left:400px !important; text-indent:0px;width:700px;">
 			<p class=space> </p>
 			<br>
 			<div id="announce-text">
 			<h2>Class Notes</h2>			       	
 			
-		
+			<ul>
+				<li> <a href="/vectorReview/ch12-13.pdf"> Chapter 12-13 Review </a> </li>
+			</ul>
+	
 			</div> 
 		</div>
 
