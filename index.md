@@ -2,9 +2,9 @@
 layout: default
 ---
 
-<img src="{{site.baseurl}}/assets/ben-small.jpg" width="150px" alt="Benjamin Dicken" style="float:left; margin-bottom:300px; margin-right:40px;"/>
+<img src="{{site.baseurl}}/assets/ben-small.jpg" width="150px" alt="Rachel Dicken" style="float:left; margin-bottom:300px; margin-right:40px;"/>
 
-## Benjamin Dicken
+## Rachel Dicken
 
 Contact me at {{site.email}}
 

@@ -1,12 +1,11 @@
 
-title: Benjamin Dicken
-email: bddicken AT gmail DOT com
+title: Rachel Dicken
+email: rachel DOT dicken AT basised DOT com
 description: > # this means to ignore newlines until "baseurl:"
-  # Personal website for Benjamin Dicken.
+  # Personal website for Rachel Dicken.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-github_username:  bddicken
-stackoverflow_username:  bddicken
+
 
 # Build settings
 highlighter: rouge
