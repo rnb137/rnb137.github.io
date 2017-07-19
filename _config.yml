@@ -2,7 +2,7 @@
 title: Rachel Dicken
 email: rachel DOT dicken AT basised DOT com
 description: > # this means to ignore newlines until "baseurl:"
-  # Personal website for Rachel Dicken.
+  # Rachel Dicken's Website
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
