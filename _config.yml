@@ -10,7 +10,7 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 # Build settings
 highlighter: rouge
 markdown: kramdown
-theme: jekyll-theme-architect
+theme: jekyll-theme-cayman
 gems:
   - jekyll-feed
   - jekyll-seo-tag
