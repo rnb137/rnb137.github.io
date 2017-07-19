@@ -5,9 +5,9 @@ layout: default
 ## Pre-Calculus AB
 
 
-### [Class Notes]({{site.baseurl}}/notes/index.html)
-### [Worksheets]({{site.baseurl}}/ws/index.html)
-### [Worksheet Keys]({{site.baseurl}}/wskeys/index.html)
-### [Study Guides]({{site.baseurl}}/guides/index.html)
-### [Other Resources]({{site.baseurl}}/resouces/index.html)
+### [Class Notes](./notes/index.html)
+### [Worksheets](./ws/index.html)
+### [Worksheet Keys](./wskeys/index.html)
+### [Study Guides](./guides/index.html)
+### [Other Resources](./resouces/index.html)
 
