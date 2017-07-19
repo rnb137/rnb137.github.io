@@ -9,9 +9,7 @@ layout: default
 Contact me at {{site.email}}
 
 ### [Courses]({{site.baseurl}}/courses/index.html)
-### [Projects]({{site.baseurl}}/projects/index.html)
-### [CV]({{site.baseurl}}/assets/cv.pdf)
-### [Github](https://github.com/bddicken)
-### [LinkedIn](https://www.linkedin.com/pub/benjamin-dicken/73/97a/787)
-### [StackOverflow](http://stackoverflow.com/users/1522168/bddicken)
+### [Research]({{site.baseurl}}/research/index.html)
+### [Coding]({{site.baseurl}}/coding/index.html)
+### [Curriculum Vitae]({{site.baesurl}}/cv.pdf)
 
