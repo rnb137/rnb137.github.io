@@ -6,6 +6,6 @@ layout: default
 ## Courses
 
 
-### [Pre-Calculus AB]({{site.baseurl}}/precalc/index.html)
-### [Calculus AB]({{site.baseurl}}/calc/index.html)
-### [Multivariable Calculus]({{site.baseurl}}/vector/index.html)
+### [Pre-Calculus AB](./precalc/index.html)
+### [Calculus AB](./calc/index.html)
+### [Multivariable Calculus](./vector/index.html)
