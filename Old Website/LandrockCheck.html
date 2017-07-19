@@ -1,0 +1,110 @@
+<!doctype html>
+<html>	
+  <head>
+   <meta charset="UTF-8"/>
+    <title> Socle and Radical Series Project  </title>
+     <style>
+	strong {
+	font-size: 150%;
+	}
+	.important {
+	fill: black;
+	stroke: none;
+	font-family:  "Times New Roman", Times, Serif;
+	font-size: 150%;
+	font-weight: bold;
+	}
+     </style>
+   </head>
+   <body>
+<div style="width: 800px;"> 
+   <h1><strong>LandrockCheck Source Code</strong></h1>
+</div>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+<div>
+<code>
+<pre class="prettyprint">
+outcome:=rec(); 
+
+#############################################################################
+# 
+#F  Function LandrockCheck( <list> )
+#
+# <#GAPDoc Label="LandrockCheckHeader">
+#   <ManSection>
+#     <Filt Type="Function" Name="LandrockCheck" Arg="pimList"/>
+#     <!--
+# INPUT: <pimList>: a list of PIMs.
+#     -->
+#
+#     <!--
+# OUTPUT: true or false.
+#     -->
+#     <Returns> a record containing the Loewy lengths of the PIMs, whether
+#               the hypotheses of Landrocks theorem are met, if all PIMs
+#               are upper or lower stable, whether the result of Landrocks 
+#               theorem checks out, and group information. 
+#     </Returns>
+#     <Description><E>LandrockCheck</E> uses straightforward computations to 
+#                  check that all PIMs are either upper or lower stable and that
+#                  then all PIMs have the same Loewy length. This and further
+#                  data is stored in outcome.
+#     </Description>
+#   </ManSection>
+# <#/GAPDoc>
+#
+# METHOD: First we check that the hypotheses of Landrock't theorem are 
+#         are satisfied. That is all PIMs of the algebra must be all
+#         upper stable or all lower stable. This amounts to checking
+#         that the second row of the socle and radical series matrices
+#         are equal (upper stable) for all PIMs or that the antepenultimate 
+#         row of the socle and radical series matrices are equal (lower
+#         stable) for all PIMs. Next, we record the Loewy lengths of all 
+#         the PIMs and return the results of meeting Landrocks theorem.    
+# 
+#############################################################################
+
+LandrockCheck := function(listPIMs)
+  local pass, upperStable, lowerStable, i,j,k, n, loewyLengths;
+  pass:= true;
+  upperStable:=true;
+  lowerStable:= true;
+  loewyLengths:=[];
+  outcome:=rec(upperStable :=false, lowerStable:=false, landrockTheoremHolds :=false, loewyLengths:=[], group:="",prime:=1);
+
+  for i in [1..Length(listPIMs.PIMs)] do 
+
+    # Check if each PIM is upper stable
+    if listPIMs.PIMs[i].radicalSeries[2] = listPIMs.PIMs[i].socleSeries[2] then;
+    else upperStable := false;
+    fi;od;
+
+    #if upperStable = false then;
+    for j in [1..Length(listPIMs.PIMs)] do
+    # Check if each PIM is lower stable
+    if listPIMs.PIMs[j].radicalSeries[Length(listPIMs.PIMs[j].radicalSeries)-2] = 
+    listPIMs.PIMs[j].socleSeries[Length(listPIMs.PIMs[j].socleSeries)-2] then;
+    else lowerStable := false;
+    fi; od; 
+
+  n:= Length(listPIMs.PIMs[1].radicalSeries);
+
+  # Check Landrocks theorem holds
+  for k in [1..Length(listPIMs.PIMs)] do 
+    Add(loewyLengths,  Length(listPIMs.PIMs[k].radicalSeries), k);
+    if Length(listPIMs.PIMs[k].radicalSeries) = n then;
+    elif upperStable = false and lowerStable = false then pass:=true;
+    else  pass := false;
+    fi;od;
+
+  # results of PIMs being upper or lower stable, PIMs Loewy lengths, and whether Landrocks theorem passes on these PIMs
+  outcome:=rec(upperStable:=upperStable, lowerStable:=lowerStable, landrockTheoremHolds:=pass, loewyLengths:=loewyLengths, group:=listPIMs.group,prime:=listPIMs.prime);
+ 
+  return pass;
+end;
+####################### End of landrockCrit Function #####################
+
+</pre>
+</code>
+</div>
+</html>

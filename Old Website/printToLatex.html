@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8"/>
+    <title> Socle and Radical Series Project  </title>
+     <style>
+        strong {
+        font-size: 150%;
+        }
+        .important {
+        fill: black;
+        stroke: none;
+        font-family:  "Times New Roman", Times, Serif;
+        font-size: 150%;
+        font-weight: bold;
+        }
+     </style>
+   </head>
+   <body>
+<div style="width: 800px;">
+   <h1><strong>PrintTableToLaTeX Source Code:</strong></h1>
+</div>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+<div>
+<code>
+<pre class="prettyprint">
+#############################################################################
+#
+#F  Function PrintTableToLaTeX( <list> )
+#
+# <#GAPDoc Label="PrintTableToLaTeXHeader">
+#   <ManSection>
+#     <Filt Type="Function" Name="PrintTableToLaTeX" Arg="table, string, title, append"/>
+#     <!--
+# INPUT: <table>: Matrix to be converted to a LaTeX table.
+#	 <string>: a string added to file name for LaTeX table. 
+#	 <title>: string of title for the table in LaTeX.
+#	 <append>: true then append to file if it exists, else overwrite.
+#     -->
+#
+#     <!--
+# OUTPUT: Prints a File
+#     -->
+#     <Returns> file containing LaTeX code for a table with entries 
+#               from matrix.
+#     </Returns>
+#     <Description><E>PrintTableToLaTeX</E> See returns.
+#     </Description>
+#   </ManSection>
+# <#/GAPDoc>
+#
+# METHOD: Run through entries of matrix, create string of commands
+#         for a row in a LaTeX table, then print to file.
+#
+#############################################################################
+
+PrintTableToLaTeX:=function(table, string, title, append)
+  local fileName, str,i,j;
+  fileName:= Concatenation("LaTeXTable-", string);
+  # Append or overwrite any existing files
+  if(append = true) then ;
+  else PrintTo(fileName, "");
+  fi;
+  # Preamble for LaTeX table
+  AppendTo(fileName, Concatenation(Concatenation(Concatenation("\\begin{table}[htp] 
+	\n\\centering \n\\caption{",  title),"} \n\\label{tab:gr} 
+	\n\\footnotesize\\setlength{\\tabcolsep}{2.5pt} 
+	\n\\begin{tabular}{l@{\\hspace{6pt}} *{", String(Length(table[1]))), "}{c}} 
+	\n\\toprule\n"));
+  
+  str:="";
+  
+  for i in [1..Length(table)] do
+    for j in [1..Length(table[1])] do
+      if (IsInt(table[i][j]) = false) then str:=String(table[i][j]);
+      else str:= Concatenation(Concatenation(" $ ", String(table[i][j])), " $ ");
+      fi;
+      
+      if (j = Length(table[1])) then str:=Concatenation(str, " \\\\");
+      else str:=Concatenation(str, " &");
+      fi;
+  
+      AppendTo(fileName, str); 
+    od;
+    AppendTo(fileName, "\n");
+  od;
+  
+  AppendTo(fileName, "\\bottomrule \n\\addlinespace \n\\end{tabular} \n\\end{table}\n");
+end;
+
+</pre>
+</code>
+</div>
+</body>
+</html>
+

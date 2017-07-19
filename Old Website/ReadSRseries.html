@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8"/>
+    <title> Socle and Radical Series Project  </title>
+     <style>
+        strong {
+        font-size: 150%;
+        }
+        .important {
+        fill: black;
+        stroke: none;
+        font-family:  "Times New Roman", Times, Serif;
+        font-size: 150%;
+        font-weight: bold;
+        }
+     </style>
+   </head>
+   <body>
+<div style="width: 800px;">
+   <h1><strong>ReadSRseries Source Code:</strong></h1>
+</div>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+<div>
+<code>
+<pre class="prettyprint">
+# Load package Basic, modatlasgroups file of group names, read other functions.
+LoadPackage("basic");
+Read("GAPssrsCheck");  # Code for Socle Radical Equality Check for simple groups
+Read("modatlasgroups");
+Read("LandrockCheck");
+Read("compute2");
+
+Remove(modatlasgroupsstring, 13);
+listPIMs:=[];
+
+#########################################################################################################
+#
+# Socle Radical Equality Check for Algebra
+#
+# Input - Group Algebra result of AutoCalcBasic 
+#
+# Output - List of record for group, containing group, characteristic, record for each PIM of the group,
+#      	   and true if all PIMs of the group have equal radical and socle series (false otherwise). 
+#  	   Records for PIMs contain matrices for socle and radical series of PIM, and true if the radical 
+#  	   and socle series are equal (false otherwise).
+#
+#########################################################################################################
+
+srCheckAlg := function(alg)
+  local n,m,i,j,k,a, db, module, soc, rad, mats, matr,equal,flag, list;
+  equal := true; flag := true;
+  a:=rec();
+  listPIMs :=[];
+  list:=[];
+
+  # Get each PIM, with same db of simple modules across the board.
+
+  for n in [1..Length(alg.PIMs)] do
+    module := alg.PIMs[n].PIM;
+    db := Chop(alg.global_simples[1]).db;
+
+    for m in [2..Length(alg.global_simples)] do
+      db := Chop(alg.global_simples[m], rec(db := db)).db;
+    od;
+
+    # Create the Socle and Radical series for each PIM.
+
+    soc := SocleSeries(module, db);
+    rad := RadicalSeries(module, db);
+
+    # Use matrices to keep track of the simples in each factor of the
+    # socle and radical series to compare.
+    # If the matrices are equal then the Socle and Radical series
+    # are the same, if not we can read off from the matrices by what
+    # factors they differ by in terms of simple modules from db.
+
+    mats := NullMat(Length(soc.isotypes), Length(alg.PIMs));
+    matr := NullMat(Length(rad.isotypes), Length(alg.PIMs));
+
+    # Create the socle series matrix which shows which simple modules are
+    # in each factor of the socle series.
+
+    for i in [1..Length(soc.isotypes)] do
+      for k in [1..Length(soc.isotypes[i])] do
+        for j in [i..Length(mats)] do
+          mats[j][soc.isotypes[i][k]]:=mats[j][soc.isotypes[i][k]]+1;
+    od;od;od; 
+
+    # Create the radical series matrix which shows which simple modules
+    # are in each factor of the radical series.
+
+    for i in [1..Length(rad.isotypes)] do
+      for k in [1..Length(rad.isotypes[Length(rad.isotypes)-i+1])] do
+        for j in [i..Length(matr)] do
+          matr[j][rad.isotypes[Length(rad.isotypes)-i+1][k]]
+	    := matr[j][rad.isotypes[Length(rad.isotypes)-i+1][k]]+1;
+    od;od;od;
+
+    # Checks if the socle and radical series for PIM are equal
+
+    if mats = matr then equal := true;
+    else equal := false;
+      flag :=  false;
+    fi;
+
+    # Create PIM record and add to listPIMs.
+              
+    a:= rec(socleSeries := mats, radicalSeries := matr, srEqual := equal);
+
+    list[n] := a;
+  od;
+
+  # Create group record with listPIMs and add to list.
+
+  listPIMs := rec(group:= alg.group,prime:= alg.prime, PIMs := list, srAllEqual := flag);
+
+end; 
+
+######################################   End of Function srCheckAlg   ###################################
+
+</pre>
+</code>
+</div>
+</body>
+</html>
