@@ -2,19 +2,12 @@
 layout: default
 ---
 
-Pre-Calculus AB
+## Pre-Calculus AB
 
 
-Class Notes
-
-
-Worksheets
-
-
-Worksheet Keys
-
-
-Study Guides
-
-Resources
+### [Class Notes](./notes/index.html)
+### [Worksheets](./ws/index.html)
+### [Worksheet Keys](./wskeys/index.html)
+### [Study Guides](./guides/index.html)
+### [Resources](./resources/index.html)
 
