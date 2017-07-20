@@ -11,6 +11,9 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 highlighter: rouge
 markdown: kramdown
 theme: minima
+collections:
+        courses:
+                output:true        
 gems:
   - jekyll-feed
   - jekyll-seo-tag
