@@ -10,6 +10,6 @@ layout: default
 ### [Multivariable]({{site.baseurl}}/vector/index.html)
 ### [Research]({{site.baseurl}}/research/index.html)
 ### [Coding]({{site.baseurl}}/coding/index.html)
-### [Teaching Assistants]({{site.baseurl}}/ta/index.html)
+### [TA Application]({{site.baseurl}}/ta.pdf)
 ### [Curriculum Vitae]({{site.baseurl}}/cv.pdf)
 
