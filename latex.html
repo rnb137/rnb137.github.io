@@ -1,0 +1,143 @@
+<!doctype html>
+<html>	
+  <head>
+    
+  <title>LaTeX</title>
+
+  <meta property="og:site_name" content="Rachel Baumann">
+  <meta property="og:title" content="Rachel Baumann">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+	
+  <style>
+	strong {font-size: 150%;}
+	#title {
+		font-family:  "Quattrocento" !important;
+		font-size: 40px !important;
+		text-align:start;
+    		text-indent:100px;
+		font-weight: bold;}
+	.header {
+		margin: 0px;
+		padding:0px;
+		height: 90px;
+		text-align:start;
+    		text-indent:100px;
+    		background-color:#828183;
+    		color:white;}
+	#footer {
+    		background-color:#828183;
+    		color:white;
+    		clear:both;
+   		padding:5px;}
+	#sidebar{
+  		margin: 0px;
+  		padding: 0px;
+		line-height:30px;
+    		background-color:#eeeeee;
+    		height:1210px;
+    		width:300px;
+    		float:left;}
+	.indentedtext{
+		color: #414042;
+    		text-align:start;
+    		text-indent:100px;}
+	.space{
+		margin-bottom: 1.5cm;}
+	.ul-s {
+  		margin: 0px;
+  		padding: 0px;
+  		list-style: none;
+  		text-decoration: none; 
+		background-color:#eeeeee;}
+	.li-s {
+	 	padding-right: 5px
+  		text-decoration: none;}
+	.a-s {
+  		display: block;
+		color:#414042;		
+  		text-decoration: none;}
+	a {
+		text-decoration:none;
+		color:#8C08E8;}
+	.rowspace {
+		margin-bottom: 20px;}
+	.ul-s .li-s .a-s:hover {
+  		background-color: #ddd;}
+	.ul-s .li-s .a-s:hover span {
+  		visibility: visible}
+  </style>
+
+  <script src="jquery-1.11.3.js"></script>
+
+	
+</head>
+   <body style="margin: 0">
+
+  	<div id="header" class="indentedtext header">
+		<div style="height:35px"></div>
+		<div id="title" class="header">LaTeX</div>
+	</div>
+	<div class=indentedtext style="margin:-21px 0 0 0;">
+   		<div  id="sidebar">
+			<p class=space></p>
+	   		<div id="menu">
+				<ul class="ul-sidebar ul-s">
+<li class="li-sidebar li-s"><a class="a-sidebar a-s" href="index.html">Home</a></li>
+<li class="li-sidebar li-s"><a class="a-sidebar a-s" href="latex.html">LaTeX</a></li>
+<!--<li class="li-sidebar li-s"><a class="a-sidebar a-s" href="html.html"></a></li>
+<li class="li-sidebar li-s"><a class="a-sidebar a-s" href="css.html">CSS</a></li>
+<li class="li-sidebar li-s"><a class="a-sidebar a-s" href="javascript.html">JavaScript</a></li>
+<li class="li-sidebar li-s"><a class="a-sidebar a-s" href="d3.html">d3</a></li>
+-->					</ul>
+			</div>
+		</div>
+
+		<div id ="announce" style="margin-left:400px !important; text-indent:0px;width:700px;">
+			<p class=space></p><br>
+			<p >	LaTeX (pronounced ``LAH-tech" or ``LAY-tech") is a type-setting program which allows you to create scientific documents, construct documents that include complex mathematical expressions that are beyond the abilities of your standard work processor application. This is an extremely useful tool to learn as it is used for in the science and engineering fields, journals articles, conference papers, and technical presentations.</p>
+			<h2>Getting and Using LaTeX </h2>
+			<ul>
+				<li> <h3>Use Online:</h3></li>
+			<ul class=rowspace>
+				<li  class=rowspace><a href="https://www.overleaf.com/">Overleaf</a> in an online website that allows you to create LaTeX documents without having to download anything. It's free, easy to use, and can be accessed from any computer as long as you have internet. This is the one I use when I'm away from my laptop.</li>
+				<li  class=rowspace> <a href="https://www.sharelatex.com/">ShareLaTeX</a> is an online website that I have used a little of. Hopefully these two give you some options if you don't want to install LaTeX. </li>
+				<li  class=rowspace> <a href="http://detexify.kirelabs.org/classify.html">Detexify</a> is an online website where you can draw a symbol and it will give a list of LaTeX commands that produce similar symbols and the packages needed.</li>
+			</ul>
+				<li> <h3>Installing LaTeX:</h3></li>
+			<ul class=rowspace>
+				<li  class=rowspace>For Windows, my favorite thus far, has been <a href="http://www.texniccenter.org/">TEXnicCenter</a> which works for any version of Windows. You will also need <a href="http://www.miktex.org/">MiKTeX</a> which is a LaTeX distribution for Windows see <a href="http://www.texniccenter.org/about/requirements">LaTeX requirements</a>.  </li>
+				<li  class=rowspace> Another option for Windows is <a href="http://www.tug.org/protext/">ProTeX</a> which is also MikTeX-based. </li>
+				<li  class=rowspace> For Macs there is <a href="http://tug.org/mactex/">MacTeX</a>. </li>
+				<li  class=rowspace> <a href="http://www.xm1math.net/texmaker/">Texmaker</a> is a cross-platform LaTeX editor for Linux, Mac OSX and Window systems. </li>
+			</ul>
+			<li> <h3>Getting Started:</h3></li>
+					<ul class=rowspace>
+						<li  class=rowspace> Best starting reference : <a href="http://en.wikibooks.org/wiki/LaTeX">LaTeX Wikibook</a> </li>
+						<li  class=rowspace> Helpful examples: <a href="http://www.howtotex.com/">HowtoTeX</a> </li>
+						<li  class=rowspace> <a href="http://www.tug.org.in/tutorials.html">Online Tutorials on LaTeX</a> </li>
+						<li  class=rowspace> The long reference: <a href="http://tobi.oetiker.ch/lshort/lshort-letter.pdf">The Not so Short Introduction to LaTeX</a> </li>
+					</ul>
+					<li><h3>Sample Files:</h3>
+					<p>Provided are some sample files that will be an easy format for your homework and contain examples on how to create logic symbols, matrices, proofs, code, relation diagrams, summations and product notation, counting commands, function notation and graphing, and some calculus notation.</p>
+						<p>The .tex file is what you write while the .pdf is the output file. Both the .tex file and the .pdf files  are given for you to download and use. These should serve as a good reference and check that your platform for LaTeX is working. </p>			
+					</li> 	
+					<ul class=rowspace>
+						<li class=rowspace>Sample Homework <a href="LaTeX/LatexSampleHomework.tex">.tex</a>  </li>
+						<li class=rowspace>Sample Homework <a href="LaTeX/LatexSampleHomework.pdf">.pdf </a>  </li>
+						<li class=rowspace>This Page <a href="LaTeX/IntroToLaTeX.tex">.tex</a>  </li>
+						<li class=rowspace>This Page <a href="LaTeX/IntroToLaTeX.pdf">.pdf </a>  </li>
+						
+					</ul>	
+		</ul>
+		</div>
+
+   	</div>
+  
+   	<p class=space><p>
+	<div id="footer" class=indentedtext> Copyright &copy Rnb137  </div>
+
+   </body>
+
+</html>
+

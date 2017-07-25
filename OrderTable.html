@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8"/>
+    <title> Socle and Radical Series Project  </title>
+     <style>
+        strong {
+        font-size: 150%;
+        }
+        .important {
+        fill: black;
+        stroke: none;
+        font-family:  "Times New Roman", Times, Serif;
+        font-size: 150%;
+        font-weight: bold;
+        }
+     </style>
+   </head>
+   <body>
+<div style="width: 800px;">
+   <h1><strong>OrderTable Source Code:</strong></h1>
+</div>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+<div>
+<code>
+<pre class="prettyprint">
+################################################################
+#
+#   Created buckets and orderedBuckets lists of lists. Buckets 
+#   contains list of records for each basic algebra ordered by 
+#   prime. That is buckets[1] consists of all basic algebra in
+#   characteristic 2, buckets[2] in characteristic 3, etc. The
+#   records conatin the group name, group, characterisitc, file
+#   name for socle and radical series and the sylow type.
+#   OrderedBuckets goes a step further, ordering each list in 
+#   buckets[i] by the mutliplicity of the characterisitc. Next
+#   step would be to order orderedBuckets[i] based on sylow type.
+#
+################################################################
+
+# Global Variables
+PrimeList:=Primes{[1..25]};
+sum:=0; i:=0; j:=0; k:=0; id:=[]; n:=0;
+maxOrder:= 0;
+buckets:=[];
+orderedBuckets:=[];
+
+# Initialize buckets and orderedBuckets as lists of emppyt lists.
+for i in [1..Length(PrimeList)] do
+  Add(buckets, []);
+  Add(orderedBuckets, []);
+od;
+
+#
+for i in [1..Length(computedNames)] do
+  Read(computedNames[i]);
+  sum:=0; numExist:=false;
+  g:=AtlasGroup(list.group);
+  # U4(3), L4(3) and O8+(2) do not have permutation representations of the 
+  # group in GAP. Only have matrix groups which are to large to compute Sylow
+  # group. For all other groups compute the p-Sylow group.
+  if (not list.group="U4(3)" and not list.group="L4(3)" and not list.group="O8+(2)") 
+	then s:=SylowSubgroup(g, list.prime);
+	Display("Sylow group made");
+  else 
+	s:=fail; 
+	Display("Sylow group not made");
+  fi;
+    for k in [1..Length(Factors(Size(g)))] do
+    if (Factors(Size(g))[k] = list.prime) then sum:=sum +1;
+    fi;
+  od;
+  Display(Concatenation("multiplicity of prime is ", sum));
+  # Identify the ID of p-Sylow subgroup in AllSmallGroupsLibrary
+  if (SMALL_AVAILABLE(list.prime^sum) = fail or s=fail) then id:= false;
+  else
+    l:=NamesOfComponents(SMALL_AVAILABLE(list.prime^sum));
+    for j in [1..Length(l)] do
+      if (l[j] = "number") then numExist:=true; fi;
+    od; 
+    if (numExist= true) then;
+	if (SMALL_AVAILABLE(list.prime^sum).number<10000)
+	then id:=IdSmallGroup(s);
+	else id:=false; fi; 
+    elif (Length(AllSmallGroups(list.prime^sum))<10000) then id := IdSmallGroup(s); fi;
+    Display(Concatenation("IdSmallGroup of p-Sylow is ", id));
+  fi;
+  # Create record for basic algebra.
+  r:=rec(group:=list.group, sylow:=s, name:=computedNames[i], prime:=list.prime, SylowType:=id, order:=sum);
+  Display(Concatenation(r.name, " added"));
+  if (sum > maxOrder) then maxOrder:= sum; fi;
+  # Add record to buckets based on the prime.
+  for j in [1..Length(PrimeList)] do
+    if (list.prime = PrimeList[j]) then Add(buckets[j], r);
+    fi;
+  od;
+od;
+
+# Create orderedBuckets
+for i in [1..Length(buckets)] do
+  for p in [1..maxOrder] do
+    for j in [1..Length(buckets[i])] do
+      if (buckets[i][j].order = p) then 
+	Add(orderedBuckets[i], buckets[i][j]); fi;
+    od;
+  od;
+od;
+
+</pre>
+</code>
+</div>
+</body>
+</html>
+
