@@ -94,12 +94,23 @@
 			<p class=space> </p>
 			<br>
 			<div id="announce-text" style="height:350px">
-			<h2>Announcements</h2>			       	
-				<p>SUBJECT TO CHANGE</p>
-				<a href="Calendars/CalcABTopicsAssignments.pdf">Class Calendar</a>
+			<h2>Class Calendar</h2>			       	
+			<p> This is the calendar for the entire year. It is subject to change.</p><br>
+
+				<a style="margin-left:100px" href="Calendars/CalcABTopicsAssignments.pdf">Class Calendar</a>
 
 			</div> 
-				<p>Last Updated: September 1, 2016</p>
+<p id="date"></p>
+<script>
+n =  new Date();
+y = n.getFullYear();
+m = n.getMonth() + 1;
+d = n.getDay();
+document.getElementById("date").innerHTML = "Last Updated: " + m + "/" + d + "/" + y;
+</script>
+
+
+
 			
 		</div>
 

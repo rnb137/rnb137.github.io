@@ -63,13 +63,7 @@
   </style>
 
   <script src="jquery-1.11.3.js"></script>
-  <script language="javascript">
-n =  new Date();
-y = n.getFullYear();
-m = n.getMonth() + 1;
-d = n.getDay();
-document.getElementById("date").innerHTML = "Last Updated:" + m + "/" + d + "/" + y;
-  </script>
+  
 
 	
 </head>
@@ -102,9 +96,17 @@ document.getElementById("date").innerHTML = "Last Updated:" + m + "/" + d + "/" 
 			<div id="announce-text" style="height:350px">
 			<h2>Class Calendar</h2>			       	
 			<p> This is the calendar for the entire year. It is subject to change.</p><br>
-			<a href="Calendars/PreCalcABTopicsAssign.pdf"> Pre-Calculus AB Class Calendar </a>
+			<a style="margin-left: 100px" href="Calendars/PreCalcABTopicsAssign.pdf"> Pre-Calculus AB Class Calendar </a>
 			</div> 
-			<p id="date"></p>
+<p id="date"></p>
+<script>
+n =  new Date();
+y = n.getFullYear();
+m = n.getMonth() + 1;
+d = n.getDay();
+document.getElementById("date").innerHTML = "Last Updated: " + m + "/" + d + "/" + y;
+</script>
+
 		</div>
 
    	</div>
