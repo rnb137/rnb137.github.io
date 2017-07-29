@@ -45,24 +45,28 @@
     		text-indent:100px;}
 	.space{
 		margin-bottom: 1.5cm;}
-	ul {
+	.ul-s {
   		margin: 0px;
   		padding: 0px;
   		list-style: none;
   		text-decoration: none; 
 		background-color:#eeeeee;}
-	li {
+	.li-s {
 	 	padding-right: 5px
   		text-decoration: none;}
-	a {
+	.a-s {
   		display: block;
 		color:#414042;		
   		text-decoration: none;}
-	ul li a:hover {
+	a {
+		text-decoration:none;
+		color:#8C08E8;}
+	.ul-s .li-s .a-s:hover {
   		background-color: #ddd;}
-	ul li a:hover span {
-  		visibility: visible}
+	.ul-s .li-s .a-s:hover span {
+  		visibility: visible;}
   </style>
+
 
   <script src="jquery-1.11.3.js"></script>
 
@@ -79,14 +83,14 @@
 			<p class=space></p>
 	   		<div id="menu">
 				<ul class=ul-sidebar>
-<li class=li-sidebar><a class=a-sidebar href="index.html">Home</a></li>					
-<li class=li-sidebar><a class=a-sidebar href="precalc.html">Class Calendar</a></li>
+<li class="li-sidebar li-s"><a class="a-sidebar a-s" href="index.html">Home</a></li>					
+<li class="li-sidebar li-s"><a class="a-sidebar a-s" href="precalc.html">Class Calendar</a></li>
 
-<li class=li-sidebar><a class=a-sidebar href="preCalcClassNotes.html">Class Notes</a></li>
-<li class=li-sidebar><a class=a-sidebar href="preCalcWS2.html">Worksheets</a></li>
-<li class=li-sidebar><a class=a-sidebar href="preCalcWSkeys.html">Worksheet Keys</a></li>
-<li class=li-sidebar><a class=a-sidebar href="preCalcGuides.html">Study Guides</a></li>
-<li class=li-sidebar><a class=a-sidebar href="preCalcResources.html">Other Resources</a></li>
+<li class="li-sidebar li-s"><a class="a-sidebar a-s" href="preCalcClassNotes.html">Class Notes</a></li>
+<li class="li-sidebar li-s"><a class="a-sidebar a-s" href="preCalcWS2.html">Worksheets</a></li>
+<li class="li-sidebar li-s"><a class="a-sidebar a-s" href="preCalcWSkeys.html">Worksheet Keys</a></li>
+<li class="li-sidebar li-s"><a class="a-sidebar a-s" href="preCalcGuides.html">Study Guides</a></li>
+<li class="li-sidebar li-s"><a class="a-sidebar a-s" href="preCalcResources.html">Other Resources</a></li>
 					</ul>
 			</div>
 		</div>
