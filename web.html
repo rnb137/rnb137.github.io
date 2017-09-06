@@ -9,7 +9,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 	
-  <style>
+<style>
 	strong {font-size: 150%;}
 	#title {
 		font-family:  "Quattrocento" !important;
@@ -35,7 +35,7 @@
   		padding: 0px;
 		line-height:30px;
     		background-color:#eeeeee;
-    		height:500px;
+    		height:600px;
     		width:300px;
     		float:left;}
 	.indentedtext{
@@ -44,25 +44,29 @@
     		text-indent:100px;}
 	.space{
 		margin-bottom: 1.5cm;}
-	ul {
+	.ul-s {
   		margin: 0px;
   		padding: 0px;
   		list-style: none;
   		text-decoration: none; 
 		background-color:#eeeeee;}
-	li {
+	.li-s {
 	 	padding-right: 5px
   		text-decoration: none;}
-	a {
+	.a-s {
   		display: block;
 		color:#414042;		
   		text-decoration: none;}
-	ul li a:hover {
+	a {
+		text-decoration:none;
+		color:#8C08E8;}
+	.rowspace {
+		margin-bottom: 20px;}
+	.ul-s .li-s .a-s:hover {
   		background-color: #ddd;}
-	ul li a:hover span {
+	.ul-s .li-s .a-s:hover span {
   		visibility: visible}
   </style>
-
   <script src="jquery-1.11.3.js"></script>
 
 	
@@ -77,19 +81,41 @@
    		<div  id="sidebar">
 			<p class=space></p>
 	   		<div id="menu">
-				<ul class=ul-sidebar>
-<li class=li-sidebar><a class=a-sidebar href="index.html">Home</a></li>
-<li class=li-sidebar><a class=a-sidebar href="club.html">Club Home Page</a></li>
-<li class=li-sidebar><a class=a-sidebar href="introProgramming.html">Goal Calendar</a></li>
-<li class=li-sidebar><a class=a-sidebar href="web.html">Making a Website</a></li>
-<li class=li-sidebar><a class=a-sidebar href="intopython.html">Into to Python</a></li>
-<li class=li-sidebar><a class=a-sidebar href="pytprojects.html">Python Projects</a></li>
+				<ul class="ul-sidebar ul-s">
+<li class="li-sidebar li-s"><a class="a-sidebar a-s" href="index.html">Home</a></li>
+<li class="li-sidebar li-s"><a class="a-sidebar a-s" href="club.html">Club Home Page</a></li>
+<li class="li-sidebar li-s"><a class="a-sidebar a-s" href="introProgramming.html">Goal Calendar</a></li>
+<li class="li-sidebar li-s"><a class="a-sidebar a-s" href="web.html">Making a Website</a></li>
+<li class="li-sidebar li-s"><a class="a-sidebar a-s" href="intopython.html">Into to Python</a></li>
+<li class="li-sidebar li-s"><a class="a-sidebar a-s" href="pytprojects.html">Python Projects</a></li>
 					</ul>
 			</div>
 		</div>
-		<div id ="announce" >
-			<p class=space></p>
-		 
+<div id ="announce" style="margin-left:400px !important; text-indent:0px;width:700px;">
+	<p class=space></p><br>
+
+	<h2>HTML Editors</h2>
+	<ul>
+		<li> For Windows you can use <a href="https://www.w3schools.com/html/html_editors.asp">Notepad</a> </li>
+		<li> For Mac you can use <a href="https://www.w3schools.com/html/html_editors.asp">TextEdit</a></li>
+	<li> A more complicated, but useful editor, and the one I use is <a href="https://vim.sourceforge.io/">Vim</a>. However, I do not recommend using it to get started.</li>
+	</ul>
+
+
+	<h2> W3Schools </h2>
+	 To learn how to use <a href="https://en.wikipedia.org/wiki/HTML5">HTML5</a> we will be using the tutorials and examples provided through <a href="https://www.w3schools.com/html/default.asp">W3Schools.com</a>. Here you can read a quick tutorial on a specific HTML5 topic, see examples, and practice.  
+
+	<h2>Other Resources</h2>
+	<ul>
+		<li> <a href="https://www.codecademy.com/courses/web-beginner-en-HZA3b/0/1"> Codecademy.com</a> is another great way to learn the basics of HTML hands on with tutorials and examples.</li>
+		<li> <a href="https://websitesetup.org/html-tutorial-beginners/"> WebsiteSetup HTML Tutorial</a> is a nice step-by-step tutorial for learning the basics of HTML. Not comprehensive but a good way to get started.</li>
+		<li> <a href="https://www.quackit.com/html/templates/simple_website_templates.cfm">Quackit.com </a> has a few html templates for a basic webpage layout that you can them make your own.</li>
+	</ul>
+
+		
+
+
+
 		</div>
 
    	</div>
