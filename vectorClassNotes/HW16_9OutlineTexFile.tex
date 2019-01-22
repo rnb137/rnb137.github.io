@@ -1,0 +1,91 @@
+% Vector Calc Roller Derby Project
+%
+% @author Rachel Dicken
+%
+% Last updated: 1/11/2019
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Preamble %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt]{article}
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}			% These are all packages with built in commands
+\usepackage{graphicx}			% that can be used in this file.
+\usepackage{mathtools}		% These must be specified before
+\usepackage{latexsym}			% you begin the document
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amstext}
+\usepackage{multicol}  % package for having multiple columns
+\usepackage{amsxtra} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% NEW COMMANDS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\ra}{\rightarrow}
+\newcommand{\bi}{{\bf i }}
+\newcommand{\bj}{{\bf j }}
+\newcommand{\bk}{{\bf k }}
+\newcommand{\bu}{{\bf u }}
+\newcommand{\bv}{{\bf v }}
+\newcommand{\ba}{{\bf a }}
+\newcommand{\bbb}{{\bf b }}
+\newcommand{\bc}{{\bf c }}
+\newcommand{\br}{{\bf r }}
+\newcommand{\bn}{{\bf n }}
+\newcommand{\bx}{{\bf x }}
+\newcommand{\bD}{{\bf D }}
+\newcommand{\bF}{{\bf F }}
+\newcommand{\bG}{{\bf G }}
+\newcommand{\di}{{\text{div } }}
+\newcommand{\bT}{{\bf T }}
+\newcommand{\bS}{{\bf S }}
+\newcommand{\bN}{{\bf N }}
+\newcommand{\p}{\partial}
+\newcommand{\LL}{\langle}
+\newcommand{\RR}{\rangle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setlength{\topmargin}{-0.3in}        	%%%  This sets all the spacing stuff to use the page more
+\setlength{\oddsidemargin}{-0.25in}    	%%%  efficiently than the normal "article" setup would.
+\setlength{\evensidemargin}{-0.25in}   	%%%  It's OK to play with these some.
+\setlength{\textheight}{9.5in}     			%%%
+\setlength{\textwidth}{7in}     				%%%
+\setlength{\headsep}{0in}          			%%%
+\setlength{\headheight}{0in}       			%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document} % Must always have this to begin the document
+
+\thispagestyle{plain} % This puts page numbers at the bottom
+
+\noindent{\sc Multivariable Calculus} % Label at the top for the class
+
+\vspace{0.3cm} % Vertical spacing
+
+\begin{center}
+{\bf Section 16.9 Homework}\\
+\end{center}
+
+\vspace{0.1cm}
+
+\begin{enumerate}
+
+\item Verify that the Divergence Theorem is true for the vector field $\bF$ on the region $E$ given, $\bF(x,y,z) = \LL 3x, xy, 2xz\RR$, and $E$ is the cube bounded by the planes $x=0$, $x=1$, $y=0$, $y=1$, $z=0$, and $z=1$.
+
+\item[3.] Verify that the Divergence Theorem is true for the vector field $\bF$ on the region $E$ given, $\bF(x,y,z) = \LL xy, yz, zx\RR$, and $E$ is the solid cylinder $x^2 + y^2 \leq 1$, $0 \leq z\leq 1$.
+
+\item[6.] Use the Divergence Theorem to calculate the surface integral $\displaystyle \int \int_S \bF \cdot d\bS$, that is calculate the flux of $\bF$ across $S$, given $\bF(x,y,z) = \LL x^2z^3,2xyz^3, xz^4 \RR $, and $S$ is the surface of the box with vertices $(\pm 1, \pm 2, \pm 3)$.
+
+\item[9.] Use the Divergence Theorem to calculate the surface integral $\displaystyle \int \int_S \bF \cdot d\bS$, that is calculate the flux of $\bF$ across $S$, given $\bF(x,y,z) = \LL xy\sin z, \cos(xz), y \cos z \RR$, and $S$ is the ellipsoid $x^2/a^2 + y^2/b^2 + z^2/c^2 = 1$.
+
+\item[12.] Use the Divergence Theorem to calculate the surface integral $\displaystyle \int \int_S \bF \cdot d\bS$, that is calculate the flux of $\bF$ across $S$, given $\bF(x,y,z) = \LL x^4, -x^3z^2, 4xy^2z\RR$, and $S$ is the surface of the solid bounded by the cylinder $x^2+y^2 = 1$ and the planes $z=x+2$ and $z=0$.
+
+\item[13.] Use the Divergence Theorem to calculate the surface integral $\displaystyle \int \int_S \bF \cdot d\bS$, that is calculate the flux of $\bF$ across $S$, given $\bF(x,y,z) = \LL 4x^3z, 4y^3z, 3z^4 \RR$, and $S$ is the sphere with radius $R$ and center the origin.
+
+\item[23.] Verify that $\div E = 0$ for the electric field $E(\bx) = \displaystyle \frac{\epsilon Q}{|\bx|^3}\bx$.
+
+
+
+\end{enumerate}
+
+\end{document}
