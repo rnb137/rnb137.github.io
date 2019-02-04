@@ -1,0 +1,140 @@
+% Vector Calc Kepler Project
+%
+% @author Rachel Dicken
+%
+% Last updated: 1/11/2019
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Preamble %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt]{article}
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}			% These are all packages with built in commands
+\usepackage{graphicx}			% that can be used in this file.
+\usepackage{mathtools}		% These must be specified before
+\usepackage{latexsym}			% you begin the document
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amstext}
+\usepackage{multicol}  % package for having multiple columns
+\usepackage{amsxtra} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% NEW COMMANDS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\ra}{\rightarrow}
+\newcommand{\bi}{{\bf i }}
+\newcommand{\bj}{{\bf j }}
+\newcommand{\bk}{{\bf k }}
+\newcommand{\bu}{{\bf u }}
+\newcommand{\bv}{{\bf v }}
+\newcommand{\ba}{{\bf a }}
+\newcommand{\bbb}{{\bf b }}
+\newcommand{\bc}{{\bf c }}
+\newcommand{\br}{{\bf r }}
+\newcommand{\bh}{{\bf h }}
+\newcommand{\bp}{{\bf p }}
+\newcommand{\bD}{{\bf D }}
+\newcommand{\bF}{{\bf F }}
+\newcommand{\bG}{{\bf G }}
+\newcommand{\di}{{\text{div } }}
+\newcommand{\bT}{{\bf T }}
+\newcommand{\bN}{{\bf N }}
+\newcommand{\p}{\partial}
+\newcommand{\LL}{\langle}
+\newcommand{\RR}{\rangle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setlength{\topmargin}{-0.3in}        	%%%  This sets all the spacing stuff to use the page more
+\setlength{\oddsidemargin}{-0.25in}    	%%%  efficiently than the normal "article" setup would.
+\setlength{\evensidemargin}{-0.25in}   	%%%  It's OK to play with these some.
+\setlength{\textheight}{9.5in}     			%%%
+\setlength{\textwidth}{7in}     				%%%
+\setlength{\headsep}{0in}          			%%%
+\setlength{\headheight}{0in}       			%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document} % Must always have this to begin the document
+
+\thispagestyle{plain} % This puts page numbers at the bottom
+
+\noindent{\sc Multivariable Calculus} % Label at the top for the class
+
+\vspace{0.3cm} % Vertical spacing
+
+\begin{center}
+{\bf Kepler's Planetary Laws Project}\\
+\end{center}
+
+\vspace{0.1cm}
+\begin{enumerate}
+
+\item Find and write down Kepler's three laws of planetary motion.
+
+\item In Isaac Newton's book, {\it Principia Mathematic 1687}, he showed that Kepler's three laws of planetary motion where consequences of two of his own Laws. Research which of his two laws were used. State the two laws.
+
+
+{\bf Set up for proving Kepler's Law:}\\
+ \noindent
+Since the gravitational force of the sun on a planet is so much larger than forces exerted by other celestial bodies, we can safely ignore all bodies in the universe except the sun and the one planet revolving about it. Using a coordinate system with the sun at the origin, let $\br(t)$ be the position vector of the planet relative to the sun.
+
+\item State Newton's Laws from part 2 in vector form, labeling constants.
+
+\item For Kepler's first law, we begin by showing the planet moves in one plane. How can this be shown using vectors? (Hint: Draw a picture of a curve in the $xy$-plane, label vectors you know, and ask what would allow you to conclude the position of the planet is always in the plane.)
+
+\item Prove what you stated in 4. (Hint: You will need to write the acceleration in terms of the position.)
+
+\item How can you conclude that the orbit of the planet is in a plane?
+
+Next we prove that the planet's orbit is an ellipse. It is convenient to choose a coordinate axes so that the planet is moving in the $xy$-plane. In order to show the path is an ellipse you need to know the standard form of an ellipse and the polar form involving the eccentricity constant, $e$, a fixed positive number.
+
+\item What is the standard form of an ellipse with axis length $2a$ along the $x$-axis and axis length $2b$ along the $y$-axis?
+
+\begin{multicols}{2}
+\item Let $F$ be the focus, $l$ the directix and $e$ the eccentricity. Show that an ellise is the set of all points with $\displaystyle \frac{|PF|}{|Pl|} = e$ if $e <1$. (Hint: You will need to rewrite the equation so that $r$ and $\theta$ are eliminated then complete the square to put into the standard form.)
+
+\columnbreak
+
+\includegraphics[scale=1]{keplerPic2}
+
+\end{multicols}
+
+\item Now we see the form that we need to get $r= |\br|$ into to prove it's an ellipse. Show that $\ba \times (\br \times \bv) = GM\bu'$ where $\bu$ is a unit vector in the direction of $\br$.
+
+
+\item Let $\bh = \br \times \bv$. Show $\bv \times \bh = GM\bu + \bc$ with $\bc$ in the $xy$-plane. (Hint: Differential $\bv \times \bh$ and then integrate.)
+
+\item Show $\br \cdot( \bv \times \bh) = h^2$ and that $\br \cdot ( \bv \times \bh) = GMr + rc\cos \theta$ where $h = |\bh|$ and $c=|\bc|$.
+
+\item Conclude you have the polar equation of an ellipse. This proves Kelper's first law.
+
+\newpage
+
+\begin{multicols}{2}
+\item Next to prove Kepler's second law let $A(t)$ be the area swept out by the position $\br(t)$ over $[t_0,t]$as shown in the figure. Use polar coordinates to express $\br(t)$ in terms of $r=|\br|$ and $\theta$.
+\columnbreak
+
+\includegraphics[scale=1]{keplerPic1}
+\end{multicols}
+
+\item What needs to be shown to conclude Kepler's second law?
+
+\item Show that $\displaystyle h = r^2 \frac{d\theta}{dt}$. Where $h = |\bh| = |\br \times \bv|$.
+
+\item Show that: $$ \frac{dA}{dt} = \frac{1}{2} r^2 \frac{d\theta}{dt}$$.
+
+
+\item Conlude Kepler's second law.
+
+ Lastly, to prove Kepler's third law let $T$ be the period of the planet about the sun and let the major and minor axes lengths be $2a$ and $2b$ respectively.
+
+\item Show $\displaystyle T = \frac{2\pi a b }{h}$.
+
+\item Show $\displaystyle \frac{h^2}{GM} = \frac{b^2}{a}$. (Hint: You will need to look at your work in 8 and 12.)
+
+\item Show $\displaystyle T^2 = \frac{4\pi^2}{GM} a^3$ and conclude Kepler's third law.
+
+\end{enumerate}
+
+
+
+\end{document} % Don't forget to end your document!

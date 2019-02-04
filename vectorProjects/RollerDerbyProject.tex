@@ -1,0 +1,118 @@
+% Vector Calc Roller Derby Project
+%
+% @author Rachel Dicken
+%
+% Last updated: 1/11/2019
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Preamble %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt]{article}
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}			% These are all packages with built in commands
+\usepackage{graphicx}			% that can be used in this file.
+\usepackage{mathtools}		% These must be specified before
+\usepackage{latexsym}			% you begin the document
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amstext}
+\usepackage{multicol}  % package for having multiple columns
+\usepackage{amsxtra} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% NEW COMMANDS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\ra}{\rightarrow}
+\newcommand{\bi}{{\bf i }}
+\newcommand{\bj}{{\bf j }}
+\newcommand{\bk}{{\bf k }}
+\newcommand{\bu}{{\bf u }}
+\newcommand{\bv}{{\bf v }}
+\newcommand{\ba}{{\bf a }}
+\newcommand{\bbb}{{\bf b }}
+\newcommand{\bc}{{\bf c }}
+\newcommand{\br}{{\bf r }}
+\newcommand{\bD}{{\bf D }}
+\newcommand{\bF}{{\bf F }}
+\newcommand{\bG}{{\bf G }}
+\newcommand{\di}{{\text{div } }}
+\newcommand{\bT}{{\bf T }}
+\newcommand{\bN}{{\bf N }}
+\newcommand{\p}{\partial}
+\newcommand{\LL}{\langle}
+\newcommand{\RR}{\rangle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setlength{\topmargin}{-0.3in}        	%%%  This sets all the spacing stuff to use the page more
+\setlength{\oddsidemargin}{-0.25in}    	%%%  efficiently than the normal "article" setup would.
+\setlength{\evensidemargin}{-0.25in}   	%%%  It's OK to play with these some.
+\setlength{\textheight}{9.5in}     			%%%
+\setlength{\textwidth}{7in}     				%%%
+\setlength{\headsep}{0in}          			%%%
+\setlength{\headheight}{0in}       			%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document} % Must always have this to begin the document
+
+\thispagestyle{plain} % This puts page numbers at the bottom
+
+\noindent{\sc Multivariable Calculus} % Label at the top for the class
+
+\vspace{0.3cm} % Vertical spacing
+
+\begin{center}
+{\bf Roller Derby Project}\\
+\end{center}
+
+\vspace{0.1cm}
+
+\begin{multicols}{2}\noindent We are going to race 4 objects down a ramp. Suppose you roll a marble (solid ball), a squash ball (hollow ball), streel bar (solid cylinder), and a lead pipe (hollow cylinder) down a ramp at the same time.
+
+\columnbreak
+\includegraphics[scale=1]{derbyPic1}
+\end{multicols}
+
+\begin{enumerate}
+\item Make a guess about which object will reach the bottom first.
+
+
+\item To answer definitely we consider a ball and cylinder with mass $m$, radius $r$, moment of inertia $I$ (about the axis of rotation). If the highest place on the ramp is $h$, then what is the potential energy of the object?
+
+
+\item If the object reaches the bottom with velocity $v$ and angular velocity $\omega$ (with $v = r\omega$)  then what is the kinetic energy at the bottom of the ramp? (Hint: Remember that kinentic energy consists of translational and rotational energy.)
+
+\item If the energy lost by friction is negligible then conservation of energy gives:
+
+
+\item Show that $\displaystyle v^2 = \frac{2gh}{1+I^*}$ where $\displaystyle I^* = \frac{I}{mr^2}$.
+
+\item Let $y(t)$ be the vertical distance traveled at time $t$. Show that $\displaystyle v^2 = \frac{2gy(t)}{1+I^*}$ at any time $t$.
+
+\item Show that $y$ satisfies the differential equation:
+
+$$\frac{dy}{dt} = \sqrt{\frac{2g}{1+I^*}}(\sin \alpha ) \sqrt{y}$$
+
+where $\alpha$ is the angle of inclination of the ramp.
+
+\item Solve the differential equation above and use it to find the total travel time $T$.
+
+
+\item Since $h, g, \alpha$ are constants what must be true about $I^*$ to minimize the total travel time $T$ and hence win the race?
+
+
+\item Find $I^*$ for a solid cylinder.
+
+\item Find $I^*$ for a hollow cylinder.
+
+\item Find $I^*$ for a solid sphere. 
+
+\item Find $I^*$ for a hollow sphere.
+
+\item Conclude the finishing order of the race.
+
+
+
+\end{enumerate}
+
+
+\end{document}% Don't forget to end your document!
+
